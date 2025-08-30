@@ -62,4 +62,6 @@ module Instruction_Memory(
         memory[31] = 32'b0;
     end
 
+    assign instruction = memory[address];
+
 endmodule
