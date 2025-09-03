@@ -32,6 +32,9 @@ module Control(
     output reg ALUSrc,
     output reg RegWrite
     );
+    //reg RegDst;
+    //reg Jump;
+    
 
 
     // ref: https://en.wikibooks.org/wiki/MIPS_Assembly/Instruction_Formats 

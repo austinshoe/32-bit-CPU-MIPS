@@ -25,7 +25,7 @@ module ALU(
         input [31:0] ReadData1,
         input [31:0] ReadData2,
         output reg [31:0] ALUResult,
-        output _isZero;
+        output _isZero
     );
 
     parameter AND_OP = 4'b0;

@@ -26,6 +26,7 @@ module top_level(
         _isZero
     );
     input globalclock, globalreset;
+    output _isZero;
     wire [31:0] instruction;
     wire [31:0] next_pc;
     wire [31:0] curr_pc;
@@ -41,9 +42,17 @@ module top_level(
     wire RegWrite;
     wire [31:0] pcadd4;
     wire [3:0] ALUCtrlOut;
+    wire [31:0] signextended;
+    wire [31:0] ReadData1;
+    wire [31:0] ReadData2;
+    wire [31:0] WriteData;
+    wire [31:0] ALUResult;
+    wire [4:0] DestReg;
+    wire [31:0] write_data_mux_out;
+    
 
     
-    PC ourpc (
+    PC programcounter (
         .clk(globalclock),
         .reset(globalreset),
         .next_pc(next_pc),
@@ -79,9 +88,44 @@ module top_level(
         .ALUControlOut(ALUCtrlOut)
     );
 
-    /*Registers regs (
-        .ReadReg1(instruction[25:21]);
-        .ReadReg2(instruction[20:16]);
-    );*/
+    RegMux regdest (
+        .in1(instruction[20:16]), //I
+        .in2(instruction[15:11]),
+        .sel(RegDst),
+        .out(DestReg)
+    );
+
+    Mux31 RegData (
+        .in1(ALUResult),
+        .in2(32'b0),
+        .sel(0),
+        .out(write_data_mux_out)
+    );
+
+    Registers regs (
+        .ReadReg1(instruction[25:21]),
+        .ReadReg2(instruction[20:16]),
+        .WriteReg(DestReg),
+        .WriteData(32'b0),
+        .RegWrite(RegWrite),
+        .clk(globalclock),
+        .ReadData1(ReadData1),
+        .ReadData2(ReadData2)
+    );
+
+    ALU alu (
+        .ALUControlOut(ALUCtrlOut),
+        .ReadData1(ReadData1),
+        .ReadData2(ReadData2),
+        //.ReadData2(), This could be memory too --> alusrc mux and mem implementation first
+        .ALUResult(ALUResult),
+        ._isZero(_isZero)
+    );
+
+    SignExtend addrextend (
+        .immediate_val(instruction[15:0]),
+        .extended_val(signextended)
+    );
+
 
 endmodule
