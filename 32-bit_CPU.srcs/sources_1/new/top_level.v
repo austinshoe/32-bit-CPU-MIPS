@@ -49,6 +49,7 @@ module top_level(
     wire [31:0] ALUResult;
     wire [4:0] DestReg;
     wire [31:0] write_data_mux_out;
+    wire [31:0] alusrc_mux_out;
     
 
     
@@ -116,7 +117,7 @@ module top_level(
     ALU alu (
         .ALUControlOut(ALUCtrlOut),
         .ReadData1(ReadData1),
-        .ReadData2(ReadData2),
+        .ReadData2(alusrc_mux_out),
         //.ReadData2(), This could be memory too --> alusrc mux and mem implementation first
         .ALUResult(ALUResult),
         ._isZero(_isZero)
@@ -126,6 +127,15 @@ module top_level(
         .immediate_val(instruction[15:0]),
         .extended_val(signextended)
     );
+
+    Mux31 AluSrcMux (
+        .in1(ReadData2),
+        .in2(signextended),
+        .sel(ALUSrc),
+        .out(alusrc_mux_out)
+    );
+
+
 
 
 endmodule

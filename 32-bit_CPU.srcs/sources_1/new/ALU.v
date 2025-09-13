@@ -44,7 +44,7 @@ module ALU(
                 if (ReadData1 < ReadData2)
                     ALUResult = 32'd1;
                 else 
-                    AluResult = 32'b0;
+                    ALUResult = 32'b0;
             end
             default: ALUResult = 32'b0;
         endcase
