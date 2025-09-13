@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 09/03/2025 02:14:49 AM
+// Create Date: 09/12/2025 06:19:45 PM
 // Design Name: 
-// Module Name: tb_top_level
+// Module Name: And
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,28 +20,11 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module tb_top_level;
-    reg clk;
-    reg reset;
-    wire _isZero;
-
-    top_level testtoplevel(
-        .globalclock(clk),
-        .globalreset(reset),
-        ._isZero(_isZero)
+module And(
+    input in1, in2,
+    output out
     );
 
-    always #5 clk = ~clk;
-    
-    initial begin
-        clk = 0;
-        reset = 1;
-
-        #60 reset = 0;
-
-        #2000;
-        $finish;
-
-    end
+    assign out = in1 & in2;
 
 endmodule

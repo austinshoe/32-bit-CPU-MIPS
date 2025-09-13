@@ -50,6 +50,10 @@ module top_level(
     wire [4:0] DestReg;
     wire [31:0] write_data_mux_out;
     wire [31:0] alusrc_mux_out;
+    wire [31:0] ReadDataMem;
+    wire [31:0] leftshiftout;
+    wire [31:0] branchadderout;
+    wire branchsel;
     
 
     
@@ -98,8 +102,8 @@ module top_level(
 
     Mux31 RegData (
         .in1(ALUResult),
-        .in2(32'b0),
-        .sel(0),
+        .in2(ReadDataMem),
+        .sel(MemToLog),
         .out(write_data_mux_out)
     );
 
@@ -107,7 +111,7 @@ module top_level(
         .ReadReg1(instruction[25:21]),
         .ReadReg2(instruction[20:16]),
         .WriteReg(DestReg),
-        .WriteData(32'b0),
+        .WriteData(write_data_mux_out),
         .RegWrite(RegWrite),
         .clk(globalclock),
         .ReadData1(ReadData1),
@@ -135,6 +139,38 @@ module top_level(
         .out(alusrc_mux_out)
     );
 
+    DataMemory datamem (
+        .clk(globalclock),
+        .MemRead(MemRead),
+        .MemWrite(MemWrite),
+        .address(ALUResult),
+        .ReadData(ReadDataMem),
+        .WriteData(ReadData2)
+    );
+
+    ShiftLeft shiftleft (
+        .in(signextended),
+        .out(leftshiftout)
+    );
+
+    Add branchadder (
+        .in1(pcadd4),
+        .in2(leftshiftout),
+        .out(branchadderout)
+    );
+
+    And branchyesno (
+        .in1(Branch),
+        .in2(_isZero),
+        .out(branchsel)
+    );
+
+    Mux31 isBranch (
+        .in1(pcadd4),
+        .in2(branchadderout),
+        .sel(branchsel),
+        .out(next_pc)
+    );
 
 
 

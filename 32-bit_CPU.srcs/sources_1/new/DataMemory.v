@@ -26,7 +26,7 @@ module DataMemory(
     input MemWrite,
     input [31:0] address,
     input [31:0] WriteData,
-    output [31:0] ReadData,
+    output reg [31:0] ReadData
     );
 
     reg [31:0] mem [0:63];
@@ -36,8 +36,17 @@ module DataMemory(
     initial begin
         for (counter = 0; counter < 64; counter = counter + 1)
         begin
-            mem[i] = 0;
+            mem[counter] = 0;
         end
+    end
+
+    always @(posedge clk) begin
+        if (MemWrite == 1)
+        mem[address] <= WriteData;
+        else if (MemRead == 1)
+        ReadData <= mem[address];
+        else
+        ReadData <= 32'bx;
     end
 
 

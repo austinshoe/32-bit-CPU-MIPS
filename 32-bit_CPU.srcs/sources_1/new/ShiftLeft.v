@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 09/03/2025 02:14:49 AM
+// Create Date: 09/12/2025 10:35:54 PM
 // Design Name: 
-// Module Name: tb_top_level
+// Module Name: ShiftLeft
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,28 +20,12 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module tb_top_level;
-    reg clk;
-    reg reset;
-    wire _isZero;
-
-    top_level testtoplevel(
-        .globalclock(clk),
-        .globalreset(reset),
-        ._isZero(_isZero)
+module ShiftLeft(
+    input [31:0] in,
+    output reg [31:0] out
     );
 
-    always #5 clk = ~clk;
-    
-    initial begin
-        clk = 0;
-        reset = 1;
-
-        #60 reset = 0;
-
-        #2000;
-        $finish;
-
+    always @(in) begin
+        out = in<<2;
     end
-
 endmodule
