@@ -43,7 +43,7 @@ module Control(
             // R-type
             6'b000000: {RegDst, Jump, Branch, MemRead, MemToLog, ALUOp, MemWrite, ALUSrc, RegWrite} = 10'b1000010001;
             //lw
-            6'b100011: {RegDst, Jump, Branch, MemRead, MemToLog, ALUOp, MemWrite, ALUSrc, RegWrite} = 10'b0001000111;
+            6'b100011: {RegDst, Jump, Branch, MemRead, MemToLog, ALUOp, MemWrite, ALUSrc, RegWrite} = 10'b0001100111;
             //sw
             6'b101011: {RegDst, Jump, Branch, MemRead, MemToLog, ALUOp, MemWrite, ALUSrc, RegWrite} = 10'b0000000110;
             //beq

@@ -41,8 +41,8 @@ module Registers(
         regs[7] = 32'd0;
         regs[8] = 32'd0;
         regs[9] = 32'd15;
-        regs[10] = 32'd0;
-        regs[11] = 32'd0;
+        regs[10] = 32'd13;
+        regs[11] = 32'd13;
         regs[12] = 32'd0;
         regs[13] = 32'd0;
         regs[14] = 32'd0;
