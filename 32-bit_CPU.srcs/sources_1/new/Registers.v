@@ -25,22 +25,22 @@ module Registers(
     input [31:0] WriteData,
     input RegWrite,
     input clk,
-    output reg ReadData1, ReadData2
+    output reg [31:0] ReadData1, ReadData2
     );
 
     reg [31:0] regs[0:31];
 
-    initial begin
+    initial begin //manually set / init
         regs[0] = 32'd0;
-        regs[1] = 32'd0;
-        regs[2] = 32'd0;
-        regs[3] = 32'd0;
-        regs[4] = 32'd0;
-        regs[5] = 32'd0;
-        regs[6] = 32'd0;
+        regs[1] = 32'd1;
+        regs[2] = 32'd5;
+        regs[3] = 32'd20;
+        regs[4] = 32'd17;
+        regs[5] = 32'd7;
+        regs[6] = 32'd25;
         regs[7] = 32'd0;
         regs[8] = 32'd0;
-        regs[9] = 32'd0;
+        regs[9] = 32'd15;
         regs[10] = 32'd0;
         regs[11] = 32'd0;
         regs[12] = 32'd0;
@@ -69,11 +69,13 @@ module Registers(
     begin
         if (RegWrite == 1)
         regs[WriteReg]<= WriteData;
-        else
-        begin
-            ReadData1 <= regs[ReadReg1];
-            ReadData2 <= regs[ReadReg2];
-        end
+        //else
+        //begin
+        //    ReadData1 <= regs[ReadReg1];
+        //    ReadData2 <= regs[ReadReg2];
+        //end
     end
+    assign ReadData1 = regs[ReadReg1];
+    assign ReadData2 = regs[ReadReg2];
 
 endmodule

@@ -35,9 +35,9 @@ module ALUControl(
     always @(*) begin 
         casez ({ALUOp, funct})
             //lw, sw
-            8'b00xxxxxx: ALUControlOut = ADD_OP;
+            8'b00??????: ALUControlOut = ADD_OP;
             //beq
-            8'b01xxxxxx: ALUControlOut = SUB_OP;
+            8'b01??????: ALUControlOut = SUB_OP;
             //add (R-type)
             8'b10100000: ALUControlOut = ADD_OP;
             //sub (R-type)

@@ -37,7 +37,7 @@ module tb_top_level;
         clk = 0;
         reset = 1;
 
-        #60 reset = 0;
+        #0.01 reset = 0;
 
         #2000;
         $finish;

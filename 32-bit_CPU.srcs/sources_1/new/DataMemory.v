@@ -40,14 +40,24 @@ module DataMemory(
         end
     end
 
-    always @(posedge clk) begin
+    /*always @(posedge clk) begin
         if (MemWrite == 1)
         mem[address] <= WriteData;
         else if (MemRead == 1)
         ReadData <= mem[address];
         else
-        ReadData <= 32'bx;
+        ReadData <= 32'b0;
+    end*/
+    always @(posedge clk) begin
+        if (MemWrite == 1)
+            mem[address] <= WriteData;
     end
 
+    always @(*) begin
+        if (MemRead == 1)
+            ReadData <= mem[address];
+        else
+            ReadData <= 32'b0;
+    end
 
 endmodule

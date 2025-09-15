@@ -30,7 +30,7 @@ module top_level(
     wire [31:0] instruction;
     wire [31:0] next_pc;
     wire [31:0] curr_pc;
-    wire [3:0] ALUControlOut;
+    //wire [3:0] ALUControlOut;
     wire RegDst;
     wire Jump;
     wire Branch;
@@ -45,7 +45,7 @@ module top_level(
     wire [31:0] signextended;
     wire [31:0] ReadData1;
     wire [31:0] ReadData2;
-    wire [31:0] WriteData;
+    //wire [31:0] WriteData;
     wire [31:0] ALUResult;
     wire [4:0] DestReg;
     wire [31:0] write_data_mux_out;

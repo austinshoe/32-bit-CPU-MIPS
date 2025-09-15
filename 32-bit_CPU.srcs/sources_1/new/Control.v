@@ -45,7 +45,7 @@ module Control(
             //lw
             6'b100011: {RegDst, Jump, Branch, MemRead, MemToLog, ALUOp, MemWrite, ALUSrc, RegWrite} = 10'b0001000111;
             //sw
-            6'b101011: {RegDst, Jump, Branch, MemRead, MemToLog, ALUOp, MemWrite, ALUSrc, RegWrite} = 10'bx000x00110;
+            6'b101011: {RegDst, Jump, Branch, MemRead, MemToLog, ALUOp, MemWrite, ALUSrc, RegWrite} = 10'b0000000110;
             //beq
             6'b000100: {RegDst, Jump, Branch, MemRead, MemToLog, ALUOp, MemWrite, ALUSrc, RegWrite} = 10'b0010001000;
 

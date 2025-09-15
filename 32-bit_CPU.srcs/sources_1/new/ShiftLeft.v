@@ -22,10 +22,11 @@
 
 module ShiftLeft(
     input [31:0] in,
-    output reg [31:0] out
+    output [31:0] out
     );
+    assign out = in << 2;
 
-    always @(in) begin
+    /*always @(in) begin
         out = in<<2;
-    end
+    end*/
 endmodule

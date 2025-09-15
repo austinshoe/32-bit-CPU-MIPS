@@ -27,7 +27,7 @@ module PC(
     );
 
     always @(posedge clk or posedge reset) begin
-        if (reset) 
+        if (reset == 1) 
             curr_pc <= 32'b0;
         else
             curr_pc <= next_pc; 

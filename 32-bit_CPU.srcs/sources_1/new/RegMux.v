@@ -26,5 +26,5 @@ module RegMux(
     output[4:0] out
     );
 
-    assign out = (sel == 0) ? in1 : in2;
+    assign out = (sel) ? in2 : in1;
 endmodule
